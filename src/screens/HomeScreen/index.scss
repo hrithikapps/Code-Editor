@@ -1,0 +1,38 @@
+.home-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  .left-container {
+    background-color: #1e1e1e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .items-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      gap: 12px;
+      flex-direction: column;
+      .img {
+        width: 100px;
+      }
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+        border-radius: 20px;
+        width: 90%;
+        height: 50px;
+        border: none;
+        font-size: 20px;
+        transition-duration: 1s;
+      }
+      button:hover{
+        box-shadow: 2px 2px 6px gray;
+      }
+    }
+  }
+}
