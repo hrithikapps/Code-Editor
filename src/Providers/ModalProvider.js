@@ -4,7 +4,6 @@ export const ModalContext = createContext();
 
 export const ModalProvider = ({ children }) => {
   const [modalType, setModalType] = useState(null);
-  console.log("rendered");
   const closeModal = () => {
     setModalType(null);
   };

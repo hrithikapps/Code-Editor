@@ -29,7 +29,7 @@ const Folder = ({ folderTitle, cards }) => {
               <img src="Logo.png" alt="" />
               <div className="title-container">
                 <span>{card.title}</span>
-                <span>Language : {card?.language}</span>
+                <span>Language : {card.language}</span>
               </div>
               <div style={{ display: "flex", gap: "10px" }}>
                 <span className="material-icons">delete</span>
@@ -44,8 +44,7 @@ const Folder = ({ folderTitle, cards }) => {
 };
 
 const RightComponent = () => {
-  const folders = useContext(PlaygroundContext);
-  console.log(folders);
+  const { folders } = useContext(PlaygroundContext);
   return (
     <div className="right-container">
       <div className="header">

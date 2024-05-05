@@ -9,8 +9,6 @@ export const HomeScreen = () => {
 
   const openCreatePlaygroundModal = () => {
     modalFeatures.openModal("CREATE_PLAYGROUND");
-    console.log("openCreatePlaygroundModal");
-    console.log("+++", modalFeatures);
   };
 
   return (
