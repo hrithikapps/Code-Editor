@@ -96,6 +96,17 @@ export const PlaygroundProvider = ({ children }) => {
     setFolders(updatedFolderList);
   };
 
+  const editFolderTitle = (newFolderTitle, id) => {
+    const updatedFolderList = folders.map((folderItem) => {
+      if (folderItem.id === id) {
+        folderItem.title = newFolderTitle;
+      }
+      return folderItem;
+    });
+    localStorage.setItem("data", JSON.stringify(updatedFolderList));
+    setFolders(updatedFolderList);
+  };
+
   useEffect(() => {
     if (!localStorage.getItem("data")) {
       localStorage.setItem("data", JSON.stringify(folders));
@@ -107,6 +118,7 @@ export const PlaygroundProvider = ({ children }) => {
     createNewPlayground,
     createNewFolder,
     deleteFolder,
+    editFolderTitle,
   };
 
   return (
