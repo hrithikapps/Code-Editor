@@ -2,6 +2,8 @@ import React from "react";
 import "./index.scss";
 import { useContext } from "react";
 import { PlaygroundContext } from "../../Providers/PlaygroundProvider";
+import { ModalContext } from "../../Providers/ModalProvider";
+import { modalConstants } from "../../utils/Constants";
 
 const Folder = ({ folderTitle, cards }) => {
   return (
@@ -45,6 +47,11 @@ const Folder = ({ folderTitle, cards }) => {
 
 const RightComponent = () => {
   const { folders } = useContext(PlaygroundContext);
+  const modalFeatures = useContext(ModalContext);
+  const openCreateNewFolderModal = () => {
+    modalFeatures.openModal(modalConstants.CREATE_FOLDER);
+  };
+
   return (
     <div className="right-container">
       <div className="header">
@@ -52,7 +59,7 @@ const RightComponent = () => {
           My
           <span className="title"> Playground</span>
         </h2>
-        <div className="add-folder">
+        <div onClick={openCreateNewFolderModal} className="add-folder">
           <span className="material-icons">add</span>
           <span>New Folder</span>
         </div>

@@ -3,12 +3,13 @@ import { Modals } from "../../Providers/Modals/Modals";
 import RightComponent from "../../components/RightComponent";
 import "./index.scss";
 import { ModalContext } from "../../Providers/ModalProvider";
+import { modalConstants } from "../../utils/Constants";
 
 export const HomeScreen = () => {
   const modalFeatures = useContext(ModalContext);
 
   const openCreatePlaygroundModal = () => {
-    modalFeatures.openModal("CREATE_PLAYGROUND");
+    modalFeatures.openModal(modalConstants.CREATE_PLAYGROUND);
   };
 
   return (

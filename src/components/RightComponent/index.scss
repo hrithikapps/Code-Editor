@@ -1,4 +1,6 @@
 .right-container {
+  height: 100vh;
+  overflow-y: scroll;
   padding: 20px;
   .header {
     display: flex;
@@ -12,6 +14,7 @@
       justify-content: center;
       border: none;
       background-color: white;
+      cursor: pointer;
     }
     .title {
       font-weight: 800;

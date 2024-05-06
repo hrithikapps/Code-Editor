@@ -1,0 +1,4 @@
+export const modalConstants = {
+  CREATE_PLAYGROUND: "CREATE_PLAYGROUND",
+  CREATE_FOLDER: "CREATE_FOLDER",
+};
