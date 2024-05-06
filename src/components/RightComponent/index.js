@@ -51,7 +51,7 @@ const RightComponent = () => {
   const openCreateNewFolderModal = () => {
     modalFeatures.openModal(modalConstants.CREATE_FOLDER);
   };
-
+  
   return (
     <div className="right-container">
       <div className="header">

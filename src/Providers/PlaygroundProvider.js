@@ -84,8 +84,8 @@ export const PlaygroundProvider = ({ children }) => {
     };
 
     const allFolders = [...folders, newFolder];
-    localStorage.setItem("data", allFolders);
-    setFolders(JSON.stringify(allFolders));
+    localStorage.setItem("data", JSON.stringify(allFolders));
+    setFolders(allFolders);
   };
 
   useEffect(() => {
