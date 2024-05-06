@@ -88,6 +88,14 @@ export const PlaygroundProvider = ({ children }) => {
     setFolders(allFolders);
   };
 
+  const deleteFolder = (id) => {
+    const updatedFolderList = folders.filter((folder) => {
+      return folder.id !== id;
+    });
+    localStorage.setItem("data", JSON.stringify(updatedFolderList));
+    setFolders(updatedFolderList);
+  };
+
   useEffect(() => {
     if (!localStorage.getItem("data")) {
       localStorage.setItem("data", JSON.stringify(folders));
@@ -98,6 +106,7 @@ export const PlaygroundProvider = ({ children }) => {
     folders,
     createNewPlayground,
     createNewFolder,
+    deleteFolder,
   };
 
   return (
