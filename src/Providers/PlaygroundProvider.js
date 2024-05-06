@@ -30,7 +30,7 @@ const initialData = [
   },
 ];
 
-const defaultCodes = {
+export const defaultCodes = {
   cpp: `#include <iostream>
 int main()
 {
@@ -140,6 +140,18 @@ export const PlaygroundProvider = ({ children }) => {
     setFolders(copiedFolders);
   };
 
+  const createPlayground = (folderId, file) => {
+    const copiedFolders = [...folders];
+    for (let i = 0; i < copiedFolders.length; i++) {
+      if (copiedFolders[i].id === folderId) {
+        copiedFolders[i].files.push(file);
+        break;
+      }
+    }
+    localStorage.setItem("data", JSON.stringify(copiedFolders));
+    setFolders(copiedFolders);
+  };
+
   useEffect(() => {
     if (!localStorage.getItem("data")) {
       localStorage.setItem("data", JSON.stringify(folders));
@@ -154,6 +166,7 @@ export const PlaygroundProvider = ({ children }) => {
     editFolderTitle,
     editFileTitle,
     deleteFile,
+    createPlayground,
   };
 
   return (
