@@ -5,14 +5,14 @@ import { PlaygroundContext } from "../../Providers/PlaygroundProvider";
 import { ModalContext } from "../../Providers/ModalProvider";
 import { modalConstants } from "../../utils/Constants";
 
-const Folder = ({ folderTitle, cards, id }) => {
-  const { deleteFolder } = useContext(PlaygroundContext);
+const Folder = ({ folderTitle, cards, folderId }) => {
+  const { deleteFolder, deleteFile } = useContext(PlaygroundContext);
   const { openModal, setModalPayload } = useContext(ModalContext);
   const onDeleteFolder = () => {
-    deleteFolder(id);
+    deleteFolder(folderId);
   };
   const onEditFolderTitle = () => {
-    setModalPayload(id);
+    setModalPayload(folderId);
     openModal(modalConstants.UPDATE_FOLDER_TITLE);
   };
 
@@ -39,17 +39,29 @@ const Folder = ({ folderTitle, cards, id }) => {
         </div>
       </div>
       <div className="cards-container">
-        {cards.map((card, index) => {
+        {cards.map((file, index) => {
+          const onEditFile = () => {
+            setModalPayload({ fileId: file.id, folderId: folderId });
+            openModal(modalConstants.UPDATE_FILE_TITLE);
+          };
+          
+          const onDeleteFile = () => {
+            deleteFile(folderId, file.id);
+          };
           return (
             <div className="card" key={index}>
-              <img src="Logo.png" alt="" />
+              <img src="Logo.png" alt="Logo" />
               <div className="title-container">
-                <span>{card.title}</span>
-                <span>Language : {card.language}</span>
+                <span>{file.title}</span>
+                <span>Language : {file.language}</span>
               </div>
               <div style={{ display: "flex", gap: "10px" }}>
-                <span className="material-icons">delete</span>
-                <span className="material-icons">edit</span>
+                <span onClick={onDeleteFile} className="material-icons">
+                  delete
+                </span>
+                <span onClick={onEditFile} className="material-icons">
+                  edit
+                </span>
               </div>
             </div>
           );
@@ -84,7 +96,7 @@ const RightComponent = () => {
             folderTitle={folder?.title}
             cards={folder?.files}
             key={index}
-            id={folder.id}
+            folderId={folder.id}
           />
         );
       })}

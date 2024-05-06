@@ -107,6 +107,39 @@ export const PlaygroundProvider = ({ children }) => {
     setFolders(updatedFolderList);
   };
 
+  const editFileTitle = (newFileName, folderId, fileId) => {
+    const copiedFolders = [...folders];
+    for (let i = 0; i < copiedFolders.length; i++) {
+      if (folderId === copiedFolders[i].id) {
+        const files = copiedFolders[i].files;
+        for (let j = 0; j < files.length; j++) {
+          if (files[i].title === fileId) {
+            files[i].title = newFileName;
+            break;
+          }
+        }
+        break;
+      }
+    }
+    localStorage.setItem("data", JSON.stringify(copiedFolders));
+    setFolders(copiedFolders);
+  };
+
+  const deleteFile = (folderId, fileId) => {
+    const copiedFolders = [...folders];
+    for (let i = 0; i < copiedFolders.length; i++) {
+      if (copiedFolders[i].id === folderId) {
+        const files = [...copiedFolders[i].files];
+        copiedFolders[i].files = files.filter((file) => {
+          return file.id !== fileId;
+        });
+        break;
+      }
+    }
+    localStorage.setItem("data", JSON.stringify(copiedFolders));
+    setFolders(copiedFolders);
+  };
+
   useEffect(() => {
     if (!localStorage.getItem("data")) {
       localStorage.setItem("data", JSON.stringify(folders));
@@ -119,6 +152,8 @@ export const PlaygroundProvider = ({ children }) => {
     createNewFolder,
     deleteFolder,
     editFolderTitle,
+    editFileTitle,
+    deleteFile,
   };
 
   return (
