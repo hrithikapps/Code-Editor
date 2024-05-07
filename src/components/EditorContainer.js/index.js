@@ -1,5 +1,15 @@
 import "./index.scss";
+import Editor from "@monaco-editor/react";
+
+const editorOptions = {
+  fontsize: 18,
+  wordWrap: "on",
+};
+
 export const EditorContainer = () => {
+  const onChangeCode = (newCode) => {
+    // TODO: Hanle this use case
+  };
   return (
     <div className="root-editor-container">
       <div className="editor-header">
@@ -22,7 +32,15 @@ export const EditorContainer = () => {
           </select>
         </div>
       </div>
-      <div className="editor-body"></div>
+      <div className="editor-body">
+        <Editor
+          height={"100%"}
+          language={"javascript"}
+          options={editorOptions}
+          theme={"vs-dark"}
+          onChange={onChangeCode}
+        />
+      </div>
       <div className="editor-footer">
         <button className="btn">
           <span className="material-icons">fullscreen</span>
