@@ -1,10 +1,21 @@
 import { useParams } from "react-router-dom";
 import "./index.scss";
 import { EditorContainer } from "../../components/EditorContainer.js";
+import { useState } from "react";
 
 export const PlaygroundScreen = () => {
   const params = useParams();
   const { fileId, folderId } = params;
+  const [input, setinput] = useState("");
+  const [output, setOutput] = useState("");
+
+  const importInput = (e) => {
+    const file = e.target.files[0];
+  };
+
+  const exportOutput = () => {
+    //download a txt file for the contents of output textArea
+  };
   return (
     <div className="playground-container">
       <div className="header-container">
@@ -21,7 +32,12 @@ export const PlaygroundScreen = () => {
               <span className="material-icons">upload</span>
               <b className="">Import Input</b>
             </label>
-            <input type="file" id="input" style={{ display: "none" }} />
+            <input
+              type="file"
+              id="input"
+              style={{ display: "none" }}
+              onChange={importInput}
+            />
           </div>
           <textarea></textarea>
         </div>

@@ -5,3 +5,10 @@ export const modalConstants = {
   UPDATE_FILE_TITLE: "UPDATE_FILE_TITLE",
   CREATE_CARD: "CREATE_CARD",
 };
+
+export const fileExtensionMapping = {
+  cpp: "cpp",
+  javascript: "js",
+  python: "py",
+  java: "java",
+};
