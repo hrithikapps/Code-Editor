@@ -9,7 +9,7 @@ const editorOptions = {
   wordWrap: "on",
 };
 
-export const EditorContainer = ({ fileId, folderId }) => {
+export const EditorContainer = ({ fileId, folderId, runCode }) => {
   const { getDefaultCode, getLanguage, updateLanguage, saveCode } =
     useContext(PlaygroundContext);
   const [code, setCode] = useState(() => {
@@ -24,6 +24,7 @@ export const EditorContainer = ({ fileId, folderId }) => {
   const onChangeCode = (newCode) => {
     codeRef.current = newCode;
   };
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const importCode = (event) => {
     const file = event.target.files[0];
@@ -64,10 +65,11 @@ export const EditorContainer = ({ fileId, folderId }) => {
   const onChangeLanguage = (e) => {
     console.log(e.target.value);
     const selectedLanguage = e.target.value;
-    // console.log("fileId, folderId ", fileId, folderId);
     updateLanguage(fileId, folderId, selectedLanguage);
-    setCode(getDefaultCode(fileId, folderId));
+    const newCode = getDefaultCode(fileId, folderId);
+    setCode(newCode);
     setLanguage(e.target.value);
+    codeRef.current = newCode;
   };
 
   const onChangeTheme = (e) => {
@@ -78,8 +80,19 @@ export const EditorContainer = ({ fileId, folderId }) => {
     saveCode(fileId, folderId, codeRef.current);
   };
 
+  const fullScreen = () => {
+    setIsFullScreen(!isFullScreen);
+  };
+
+  const onCodeRun = () => {
+    runCode({ code: codeRef.current, language });
+  };
+
   return (
-    <div className="root-editor-container">
+    <div
+      className="root-editor-container"
+      style={isFullScreen ? styles.fullScreen : {}}
+    >
       <div className="editor-header">
         <div className="editor-left-container">
           <b className="title">{"Title"}</b>
@@ -111,9 +124,9 @@ export const EditorContainer = ({ fileId, folderId }) => {
         />
       </div>
       <div className="editor-footer">
-        <button className="btn">
+        <button className="btn" onClick={fullScreen}>
           <span className="material-icons">fullscreen</span>
-          <span>Full Screen</span>
+          <span>{!isFullScreen ? "Full Screen" : "Minimize"}</span>
         </button>
         <label htmlFor="import-code" className="btn">
           <span className="material-icons">upload</span>
@@ -129,11 +142,21 @@ export const EditorContainer = ({ fileId, folderId }) => {
           <span className="material-icons">download</span>
           <span onClick={exportCode}>Export Code</span>
         </button>
-        <button className="btn">
+        <button className="btn" onClick={onCodeRun}>
           <span className="material-icons">play_arrow</span>
           <span>Run Code</span>
         </button>
       </div>
     </div>
   );
+};
+
+const styles = {
+  fullScreen: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
 };

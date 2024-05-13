@@ -12,3 +12,10 @@ export const fileExtensionMapping = {
   python: "py",
   java: "java",
 };
+
+export const languageCodeMap = {
+  cpp: 54,
+  java: 91,
+  python: 92,
+  javascript: 93,
+};
