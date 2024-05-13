@@ -62,7 +62,10 @@ export const EditorContainer = ({ fileId, folderId }) => {
   };
 
   const onChangeLanguage = (e) => {
-    updateLanguage(fileId, folderId, e.taget.value);
+    console.log(e.target.value);
+    const selectedLanguage = e.target.value;
+    // console.log("fileId, folderId ", fileId, folderId);
+    updateLanguage(fileId, folderId, selectedLanguage);
     setCode(getDefaultCode(fileId, folderId));
     setLanguage(e.target.value);
   };

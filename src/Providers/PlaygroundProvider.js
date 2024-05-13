@@ -161,10 +161,10 @@ export const PlaygroundProvider = ({ children }) => {
   const getDefaultCode = (fileId, folderId) => {
     for (let i = 0; i < folders.length; i++) {
       if (folders[i].id === folderId) {
-        for (let j = 0; j < folders[i].length; j++) {
+        for (let j = 0; j < folders[i].files.length; j++) {
           const currentFile = folders[i].files[j];
           if (fileId === currentFile.id) {
-            return currentFile.code;
+            return defaultCodes[currentFile.language];
           }
         }
       }
@@ -174,25 +174,26 @@ export const PlaygroundProvider = ({ children }) => {
   const getLanguage = (fileId, folderId) => {
     for (let i = 0; i < folders.length; i++) {
       if (folders[i].id === folderId) {
-        for (let j = 0; j < folders[i].length; j++) {
+        for (let j = 0; j < folders[i].files.length; j++) {
           const currentFile = folders[i].files[j];
           if (fileId === currentFile.id) {
-            return currentFile.code;
+            console.log("+++", currentFile.language);
+            return currentFile.language;
           }
         }
       }
     }
   };
 
-  const updatelanguage = (fileId, folderId, language) => {
+  const updateLanguage = (fileId, folderId, language) => {
     const newFolders = [...folders];
     for (let i = 0; i < newFolders.length; i++) {
       if (newFolders[i].id === folderId) {
-        for (let j = 0; j < newFolders[i].length; j++) {
+        for (let j = 0; j < newFolders[i].files.length; j++) {
           const currentFile = newFolders[i].files[j];
           if (fileId === currentFile.id) {
-            currentFile.code = defaultCodes[language];
-            currentFile.language = language;
+            newFolders[i].files[j].code = defaultCodes[language];
+            newFolders[i].files[j].language = language;
           }
         }
       }
@@ -212,7 +213,7 @@ export const PlaygroundProvider = ({ children }) => {
     createPlayground,
     getDefaultCode,
     getLanguage,
-    updatelanguage,
+    updateLanguage,
   };
 
   return (
