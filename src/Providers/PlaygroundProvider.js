@@ -202,6 +202,23 @@ export const PlaygroundProvider = ({ children }) => {
     setFolders(newFolders);
   };
 
+  const saveCode = (fileId, folderId, newCode) => {
+    const newFolders = [...folders];
+    for (let i = 0; i < newFolders.length; i++) {
+      if (newFolders[i].id === folderId) {
+        for (let j = 0; j < newFolders[i].files.length; j++) {
+          const currentFile = newFolders[i].files[j];
+          if (fileId === currentFile.id) {
+            console.log("+++", newCode);
+            newFolders[i].files[j].code = newCode;
+          }
+        }
+      }
+    }
+    localStorage.setItem("data", JSON.stringify(newFolders));
+    setFolders(newFolders);
+  };
+
   const playgroundFeatures = {
     folders,
     createNewPlayground,
@@ -214,6 +231,7 @@ export const PlaygroundProvider = ({ children }) => {
     getDefaultCode,
     getLanguage,
     updateLanguage,
+    saveCode,
   };
 
   return (

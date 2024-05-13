@@ -10,7 +10,7 @@ const editorOptions = {
 };
 
 export const EditorContainer = ({ fileId, folderId }) => {
-  const { getDefaultCode, getLanguage, updateLanguage } =
+  const { getDefaultCode, getLanguage, updateLanguage, saveCode } =
     useContext(PlaygroundContext);
   const [code, setCode] = useState(() => {
     return getDefaultCode(fileId, folderId);
@@ -74,13 +74,17 @@ export const EditorContainer = ({ fileId, folderId }) => {
     setTheme(e.target.value);
   };
 
+  const onSaveCode = () => {
+    saveCode(fileId, folderId, codeRef.current);
+  };
+
   return (
     <div className="root-editor-container">
       <div className="editor-header">
         <div className="editor-left-container">
           <b className="title">{"Title"}</b>
           <span className="material-icons">edit</span>
-          <button>Save Code</button>
+          <button onClick={onSaveCode}>Save Code</button>
         </div>
         <div className="editor-right-container">
           <select onChange={onChangeLanguage} value={language}>
